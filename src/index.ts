@@ -18,7 +18,7 @@ app.post("/api/user", async (request, response) => {
   const { name, surname, age, job, haveChildren } = request.body;
 
   if (age < 18) {
-    return "User cannot be created.";
+    return response.status(500).json({ message: "User cannot be created." });
   }
 
   const create = await prismaCliente.user.create({
