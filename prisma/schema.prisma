@@ -12,6 +12,7 @@ model User {
 id  String @id @default(uuid())
 name String
 surname String
+age Int
 job String
 haveChildren Boolean
 
