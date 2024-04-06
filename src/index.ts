@@ -36,6 +36,17 @@ app.post("/api/user", async (request, response) => {
   }
 });
 
+app.put("/api/user/:id", async (request, response) => {
+  const { id } = request.params;
+  const { name, surname, age, job, haveChildren } = request.body;
+  try {
+    const findUser = await prismaCliente.user.findUnique({
+      where: { id },
+    });
+    if (!findUser) {
+      return response.status(404).json("User not found!");
+    }
+
 });
 
 app.listen(PORT, () => {
