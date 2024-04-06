@@ -47,6 +47,21 @@ app.put("/api/user/:id", async (request, response) => {
       return response.status(404).json("User not found!");
     }
 
+    const upDate = await prismaCliente.user.update({
+      where: { id },
+      data: {
+        name,
+        surname,
+        job,
+        haveChildren,
+      },
+    });
+    return response.status(200).json({ message: upDate, erro: false });
+  } catch (error) {
+    return response.status(500).json({ message: error, erro: true });
+  }
+});
+
 });
 
 app.listen(PORT, () => {
