@@ -20,17 +20,22 @@ app.post("/api/user", async (request, response) => {
   if (age < 18) {
     return response.status(500).json({ message: "User cannot be created." });
   }
+  try {
+    const create = await prismaCliente.user.create({
+      data: {
+        name,
+        surname,
+        job,
+        haveChildren,
+      },
+    });
 
-  const create = await prismaCliente.user.create({
-    data: {
-      name,
-      surname,
-      job,
-      haveChildren,
-    },
-  });
+    return response.status(201).json({ message: create, erro: false });
+  } catch (error) {
+    return response.status(500).json({ message: error, erro: true });
+  }
+});
 
-  return response.status(201).json({ message: create, erro: false });
 });
 
 app.listen(PORT, () => {
