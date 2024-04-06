@@ -62,6 +62,16 @@ app.put("/api/user/:id", async (request, response) => {
   }
 });
 
+app.delete("/api/user/:id", async (request, response) => {
+  const { id } = request.params;
+  try {
+    const remove = await prismaCliente.user.delete({
+      where: { id },
+    });
+    return response.status(200).json({ message: "Foi deletado!", erro: false });
+  } catch (error) {
+    return response.status(500).json({ message: error, erro: true });
+  }
 });
 
 app.listen(PORT, () => {
