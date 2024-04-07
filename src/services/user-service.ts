@@ -25,7 +25,6 @@ type User = {
   age: number;
 };
 
-  message: string;
 export const create = async (user: User) => {
   if (user.age < 18) {
     return {
@@ -34,6 +33,22 @@ export const create = async (user: User) => {
       error: true,
     };
   }
+
+  const validation = userSchema.safeParse(user);
+
+  if (!validation.success) {
+    const issueResponse: IIssueResponse[] = [];
+    const issues = validation.error.issues;
+    issues.map((issue) => {
+      issueResponse.push({ name: issue.path[0], message: issue.message });
+    });
+
+    return {
+      message: issueResponse,
+      error: true,
+    };
+  }
+
   try {
     const create = await prismaCliente.user.create({
       data: user,
