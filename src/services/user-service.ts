@@ -1,6 +1,21 @@
 import prismaCliente from "../../prisma/prismaClient";
 import { z } from "zod";
 
+const userSchema = z.object({
+  name: z.string().min(3),
+  surname: z.string().min(3),
+  job: z.string().min(3),
+  haveChildren: z.boolean(),
+  age: z.number().nonnegative(),
+});
+
+const updateUserSchema = z.object({
+  name: z.string().min(3).optional(),
+  surname: z.string().min(3).optional(),
+  job: z.string().min(3).optional(),
+  haveChildren: z.boolean().optional(),
+  age: z.number().nonnegative().optional(),
+});
 
 type User = {
   name: string;
