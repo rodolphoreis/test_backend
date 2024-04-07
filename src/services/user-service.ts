@@ -25,6 +25,7 @@ type User = {
   age: number;
 };
 
+  message: string;
 export const create = async (user: User) => {
   if (user.age < 18) {
     return {
