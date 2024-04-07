@@ -1,4 +1,6 @@
 import prismaCliente from "../../prisma/prismaClient";
+import { z } from "zod";
+
 
 type User = {
   name: string;
