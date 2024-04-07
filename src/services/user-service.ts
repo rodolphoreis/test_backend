@@ -1,3 +1,4 @@
+import { error } from "console";
 import prismaCliente from "../../prisma/prismaClient";
 import { z } from "zod";
 
@@ -24,6 +25,11 @@ type User = {
   haveChildren: boolean;
   age: number;
 };
+
+interface IIssueResponse {
+  name: string | number;
+  message: string;
+}
 
 export const create = async (user: User) => {
   if (user.age < 18) {
@@ -64,6 +70,21 @@ export const read = async () => {
   return read;
 };
 export const update = async (user: User, id: string) => {
+  const validation = updateUserSchema.safeParse(user);
+
+  if (!validation.success) {
+    const issueResponse: IIssueResponse[] = [];
+    const issues = validation.error.issues;
+    issues.map((issue) => {
+      issueResponse.push({ name: issue.path[0], message: issue.message });
+    });
+
+    return {
+      message: issueResponse,
+      error: true,
+    };
+  }
+
   try {
     const findUser = await prismaCliente.user.findUnique({
       where: { id },
