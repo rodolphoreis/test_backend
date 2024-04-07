@@ -27,6 +27,7 @@ app.post("/api/user", async (request, response) => {
         surname,
         job,
         haveChildren,
+        age,
       },
     });
 
@@ -54,6 +55,7 @@ app.put("/api/user/:id", async (request, response) => {
         surname,
         job,
         haveChildren,
+        age,
       },
     });
     return response.status(200).json({ message: upDate, erro: false });

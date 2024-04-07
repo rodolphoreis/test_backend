@@ -1,0 +1,19 @@
+GET http://localhost:3000/api/user
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "name":"John",
+    "surname":"Doe",
+    "job":"Back-end Developer",
+    "haveChildren": false,
+    "age": 30
+}
+###
+PUT http://localhost:3000/api/user/539e300b-4388-443d-8863-e3c15b20ac4b
+Content-Type: application/json
+
+{
+    "age":30
+}
