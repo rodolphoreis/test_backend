@@ -1,0 +1,26 @@
+GET http://localhost:3000/api/user
+
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "name":"Fernanda",
+    "surname":"Reis",
+    "age":23,
+    "job":"dev",
+    "haveChildren": false
+
+}
+
+###
+PUT http://localhost:3000/api/user/e3c37726-bcc7-424f-964d-1b47bde2c77b
+Content-Type: application/json
+
+{
+    "name":"Rodolpho dos Santos",
+}
+
+###
+DELETE  http://localhost:3000/api/user/a426c04e-a9ef-42f5-ad40-6c66e0634a1c
